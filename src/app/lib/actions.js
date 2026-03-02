@@ -2,12 +2,12 @@
 import {z} from "zod";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import { contactSchema, loginSchema } from "./schemas";
 
-const loginSchema = z.object({
-    // email: z.email("Indtast en gyldig email"),
-    username: z.string().min(1, "Indtast dit brugernavn"),
-    password: z.string().min(4, "Adgangskoden skal være mindst 4 tegn lang")
-})
+// const values = Object.fromEntries(formData)
+
+
+
 
 export async function loginUser (prevState, formData) {
 
@@ -15,11 +15,21 @@ export async function loginUser (prevState, formData) {
     const username = formData.get("username");
     const password = formData.get("password");
 
-    if (username === prevState.values.username && password === prevState.values.password) {
-        return prevState // Ingen ændring hvis brugeren har indtastet det samme som i forrige forsøg, så returner forrige state så de ikke overloader formen med den samme fejlmeddelelse igen og igen
-    }
+    // if (username === prevState.values.username && password === prevState.values.password) {
+    //     return prevState // Ingen ændring hvis brugeren har indtastet det samme som i forrige forsøg, så returner forrige state så de ikke overloader formen med den samme fejlmeddelelse igen og igen
+    // }
 
-    // ----- Validation start -----
+    // ----- Contact form validation start -----
+
+    const validated = contactSchema.safeParse({
+        username,
+        password
+    })
+    console.log("validated", validated);
+    
+
+
+    // -----Login Validation start -----
     const result = loginSchema.safeParse({ username, password })
 
     if (!result.success) {
@@ -56,9 +66,9 @@ export async function loginUser (prevState, formData) {
     const data = await response.json();
 
     cookieStore.set("authToken", data.token)
-    cookieStore.set("userID", data.userId) // sætter cookie med userID, så jeg fx kan hente brugerens data på andre sider
+    cookieStore.set("userId", data.userId) // sætter cookie med userID, så jeg fx kan hente brugerens data på andre sider
 
 
-    return redirect("/"); // sender brugeren til forsiden efter login brug fx. redirect("/profile") hvis du vil sende dem til en profilside efter login
+    return redirect("/profile"); // sender brugeren til forsiden efter login brug fx. redirect("/profile") hvis du vil sende dem til en profilside efter login
     
 }

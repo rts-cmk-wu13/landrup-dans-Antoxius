@@ -3,6 +3,7 @@ import Hero from "./components/Hero";
 import Holdtyper from "./components/Holdtyper";
 import Newsletter from "./components/Newsletter";
 import OmOs from "./components/OmOs";
+import ContactForm from "./components/ContactForm/ContactForm";
 
 export default function Home() {
   return (
@@ -12,6 +13,7 @@ export default function Home() {
         <Holdtyper />
         <Newsletter />
         <OmOs />
+        <ContactForm />
       </main>
     </div>
   );

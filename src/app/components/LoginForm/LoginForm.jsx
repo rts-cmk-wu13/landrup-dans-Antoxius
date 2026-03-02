@@ -1,6 +1,7 @@
 "use client";
 import { useActionState } from "react"; 
-import { loginUser } from "./action";
+import { loginUser } from "../../lib/actions";
+
 
 const initialState = {
     values: {
@@ -20,7 +21,7 @@ export default function LoginForm () {
                 <label htmlFor="username">Brugernavn</label>
                 <input className="bg-gray-300" type="text" id="username" name="username" defaultValue={state.values.username}/>
                 {state.errors?.username && <p>{state.errors.username}</p>}
-                {/*(optional chaining) ? = if true: continue to username and write out username error from loginscheme in our action.js in a p tag */}
+                {/*(optional chaining) ? = Hvis sandt: fortsæt til username og skriv username-fejlen fra loginScheme i vores action.js i et <p>-tag. */}
             </div>
             <div>
                 <label htmlFor="password">Adgangskode</label>
