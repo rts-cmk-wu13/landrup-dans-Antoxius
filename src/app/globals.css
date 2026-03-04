@@ -14,7 +14,7 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
+    --background: #042850;
     --foreground: #ededed;
   }
 }
@@ -29,6 +29,4 @@ body {
   background-color: var(--background);
 }
 
-.about-us-bg-color{
-  background-color: #042850
-}
+

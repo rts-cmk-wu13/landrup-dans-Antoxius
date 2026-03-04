@@ -1,5 +1,7 @@
 import { cookies } from "next/headers";
 import Link from "next/link"
+import { FaUser } from "react-icons/fa";
+import Navigation from "../components/Navigation";
 
 export default async function ProfilePage() {
 
@@ -23,23 +25,26 @@ export default async function ProfilePage() {
 
 return (
     <>
-        <h1>Min Profil</h1>
-        <div>
-            {/* <img src="placeholder" alt="" srcset="" /> */}
-            <p>{user.firstname} {user.lastname}</p>
+        <h1 className="text-white text-center text-2xl py-5">Min Profil</h1>
+        <div className="text-background text-center bg-white py-3">
+            <FaUser className="mx-auto text-6xl"/>
+
+            <p className="mt-2 text-2xl font-bold">{user.firstname} {user.lastname}</p>
             <p>{user.role == "instructor" ? "Instruktør" : "Medlem"}</p>
         </div>
-        <h2>Tilmeldte hold</h2>
+        <div className="m-5">
+        <h2 className="text-white text-xl mb-2">Tilmeldte hold</h2>
         <ul>
             {user.activities.map(activity => (
-                <li key={activity.id}>
-                    <h3>{activity.name}</h3>
-                    {/* <Link href={`/activities/${activity.id}`}>Se hold</Link> */}
-                    <p>{`/activities/${activity.id}`}</p>
-                    <Link href={`/activities/${activity.id}`}>Se hold</Link>
+                <li key={activity.id} className="bg-white/70 p-5 rounded-xl mb-5 flex flex-col gap-2">
+                    <h3 className="font-bold text-2xl">{activity.name}</h3>
+                    <p>{activity.weekday} kl.{activity.time}</p>
+                    <Link href={`/activities/${activity.id}`} className="bg-background self-start text-white rounded-xl inline-block px-10 py-3">vis hold</Link>
                 </li>
             ))}
         </ul>
+        </div>
+        <Navigation />
 
     
     </>
