@@ -4,6 +4,7 @@ import Holdtyper from "./components/Holdtyper";
 import Newsletter from "./components/Newsletter";
 import OmOs from "./components/OmOs";
 import ContactForm from "./components/ContactForm/ContactForm";
+import FooterContact from "./components/FooterContact";
 
 export default function Home() {
   return (
@@ -14,6 +15,7 @@ export default function Home() {
         <Newsletter />
         <OmOs />
         <ContactForm />
+        <FooterContact />
       </main>
     </div>
   );

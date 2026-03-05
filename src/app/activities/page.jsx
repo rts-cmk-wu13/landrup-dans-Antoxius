@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import Navigation from "../components/Navigation";
 
 export default async function page () {
     const res = await fetch(`http://localhost:4000/api/v1/activities`)
@@ -22,7 +23,7 @@ return (
             </Link>
             ))
         }
-    
+        <Navigation />
     </div>
 )
 }

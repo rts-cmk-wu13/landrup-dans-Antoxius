@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { z } from "zod";
-import { FaArrowRight } from "react-icons/fa";
 
 //    Laver validerings-regel til email.
 //    `safeParse` fortæller mig om det ligner en rigtig email.
@@ -78,7 +77,7 @@ export default function Newsletter(){
                     </form>
 
                     {/* Jeg bruger samme felt til både success og error beskeder. */}
-                    {message && <p className="mt-2">{message}</p>}
+                    {message && <p className="mt-2 text-red-500">{message}</p>}
             </div>
         </div>
     )

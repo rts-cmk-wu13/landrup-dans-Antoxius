@@ -7,8 +7,6 @@ import { contactSchema, loginSchema } from "./schemas";
 // const values = Object.fromEntries(formData)
 
 
-
-
 export async function loginUser (prevState, formData) {
 
     const cookieStore = await cookies();
@@ -18,16 +16,6 @@ export async function loginUser (prevState, formData) {
     // if (username === prevState.values.username && password === prevState.values.password) {
     //     return prevState // Ingen ændring hvis brugeren har indtastet det samme som i forrige forsøg, så returner forrige state så de ikke overloader formen med den samme fejlmeddelelse igen og igen
     // }
-
-    // ----- Contact form validation start -----
-
-    const validated = contactSchema.safeParse({
-        username,
-        password
-    })
-    console.log("validated", validated);
-    
-
 
     // -----Login Validation start -----
     const result = loginSchema.safeParse({ username, password })
@@ -71,4 +59,26 @@ export async function loginUser (prevState, formData) {
 
     return redirect("/profile"); // sender brugeren til forsiden efter login brug fx. redirect("/profile") hvis du vil sende dem til en profilside efter login
     
+}
+
+export async function submitContact(prevState, formData) {
+    const name = (formData.get("name") ?? "").toString();
+    const email = (formData.get("email") ?? "").toString();
+    const message = (formData.get("message") ?? "").toString();
+
+    const result = contactSchema.safeParse({ name, email, message });
+
+    if (!result.success) {
+        return {
+            data: { name, email, message },
+            success: false,
+            errors: z.flattenError(result.error).fieldErrors,
+        };
+    }
+
+    return {
+        data: { name: "", email: "", message: "" },
+        success: true,
+        errors: undefined,
+    };
 }

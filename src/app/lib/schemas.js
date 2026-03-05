@@ -8,5 +8,6 @@ export const loginSchema = z.object({
 
 export const contactSchema = z.object({
     name: z.string().min(1, "Indtast dit navn"),
-    email: z.email("Indtast en gyldig email adresse")
+    email: z.string().email("Indtast en gyldig email adresse"),
+    message: z.string().min(1, "Skriv en besked")
 })

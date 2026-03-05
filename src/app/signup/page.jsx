@@ -1,8 +1,6 @@
 import Image from "next/image";
-import LoginForm from "../components/LoginForm/LoginForm";
-import Link from "next/link";
 
-export default function LoginPage () {
+export default function SignUpPage () {
 
 return (
     <>
@@ -13,10 +11,7 @@ return (
             </div>
             <Image src="/assets/Rectangle 20.png" alt="rectangle image" width={600} height={100} className="relative"/>
         </div>
-        <LoginForm />
-        <div className="flex justify-center mt-5">
-            <p className="text-white">Er du endnu ikke bruger? <Link href="/signup" className="text-white underline">Opret dig her</Link></p>
-        </div>
+        
     </>
 )
 }
