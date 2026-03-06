@@ -9,7 +9,7 @@ export default async function page () {
     
 return (
     <div className="container mx-auto px-4 py-8">
-        <h1>Activities</h1>
+        <h1 className="text-white text-3xl pb-4 pl-1">Aktiviteter</h1>
         {activities.map(activity => (
             <Link href={`/activities/${activity.id}`} key={activity.id}>
                 <div className="relative h-[80vw] mb-6 rounded-4xl rounded-br-none overflow-hidden">

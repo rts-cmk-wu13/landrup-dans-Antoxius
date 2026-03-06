@@ -2,6 +2,7 @@ import { cookies } from "next/headers";
 import Link from "next/link"
 import { FaUser } from "react-icons/fa";
 import Navigation from "../components/Navigation";
+import InstructorActivities from "@/app/components/InstructorActivities";
 
 export default async function ProfilePage() {
 
@@ -34,19 +35,26 @@ return (
         </div>
         <div className="m-5">
         <h2 className="text-white text-xl mb-2">Tilmeldte hold</h2>
-        <ul>
-            {user.activities.map(activity => (
-                <li key={activity.id} className="bg-white/70 p-5 rounded-xl mb-5 flex flex-col gap-2">
-                    <h3 className="font-bold text-2xl">{activity.name}</h3>
-                    <p>{activity.weekday} kl.{activity.time}</p>
-                    <Link href={`/activities/${activity.id}`} className="bg-background self-start text-white rounded-xl inline-block px-10 py-3">vis hold</Link>
-                </li>
-            ))}
-        </ul>
-        </div>
-        <Navigation />
 
-    
+        { user.role === "instructor" ? (
+            <>
+                <p className="text-white">Du er instruktør, og har derfor ingen tilmeldte hold.</p>
+                <InstructorActivities userId={user.id}/>
+            </>
+        ) : (
+            <ul className="p-5 mt-4">
+                {user.activities.map(activity => (
+                    <li key={activity.id} className="bg-white/70 p-5 rounded-xl mb-5 flex flex-col gap-2">
+                        <h3 className="font-bold text-2xl">{activity.name}</h3>
+                        <p>{activity.weekday} kl.{activity.time}</p>
+                        <Link href={`/activities/${activity.id}`} className="bg-background self-start text-white rounded-xl inline-block px-10 py-3">vis hold</Link>
+                    </li>
+                ))}
+            </ul>
+        )}
+        </div>
+
+        <Navigation />
     </>
 )
 }
